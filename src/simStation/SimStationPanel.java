@@ -13,9 +13,9 @@ public abstract class SimStationPanel extends AppPanel {
     private JButton stop;
     private JButton stats;
 
-    public SimStationPanel(AppFactory factory) {
+    public SimStationPanel(SimStationFactory factory) {
         super(factory);
-        SimStationView view = new SimStationView((Simulation) model);
+        SimStationView view = (SimStationView) factory.getView(model);
         add(view);
         this.setLayout(new GridLayout(1, 2));
 

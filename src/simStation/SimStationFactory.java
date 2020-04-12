@@ -3,8 +3,11 @@ package simStation;
 import mvc.AppFactory;
 import mvc.Command;
 import mvc.Model;
+import mvc.View;
 
 public abstract class SimStationFactory implements AppFactory {
+
+    public abstract View getView(Model model);
 
     @Override
     public String[] getEditCommands() {
