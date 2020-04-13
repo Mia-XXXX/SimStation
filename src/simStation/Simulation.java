@@ -1,8 +1,8 @@
 /*
  * Edit history:
  *   Hui, 4/2: created
- *
- *
+ *   Hui, 4/6: update to new method
+ *   Hui, 4/11:update
  */
 
 
@@ -16,41 +16,72 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public abstract class Simulation extends Model {
-    private int clock;
-    private Timer timer;
-    private ArrayList<Agent> agents;
+    protected int clock;
+    protected Timer timer;
+    protected ArrayList<Agent> agents;
 
-    private void startTimer() {
+    public Simulation(){
+        ArrayList<Agent> agents = new ArrayList<>();
+        clock = 0;
+    }
+
+    protected void startTimer() {
         timer = new Timer();
         timer.scheduleAtFixedRate(new ClockUpdater(), 1000, 1000);
     }
 
-    private void stopTimer() {
+    protected void stopTimer() {
         timer.cancel();
         timer.purge();
     }
 
-    private class ClockUpdater extends TimerTask {
+    protected class ClockUpdater extends TimerTask {
         public void run() {
             clock++;
-            //changed();
         }
     }
 
-    public Simulation(){
-        clock = 0;
+
+    public void start(){
+        agents = new ArrayList<>();
+        populate();
+
+        for(int i =0; i < agents.size(); i++){
+            agents.get(i).start();
+        }
+        changed();
     }
 
-    public  abstract void start();
+    public void suspend(){
+        for(int i =0; i < agents.size(); i++){
+            agents.get(i).suspend();
+        }
+        changed();
+    }
 
-    public abstract void suspend();
+    public void resume(){
+        for(int i =0; i < agents.size(); i++){
+            agents.get(i).resume();
+        }
+        changed();
+    }
 
-    public abstract void resume();
+    public void stop(){
+        for(int i = 0; i < agents.size(); i++){
+            agents.get(i).stop();
+        }
+        changed();
+    }
 
-    public abstract void stop();
+    protected abstract void populate();
 
-    public abstract void populate();
+    public String[] getStats() {
+        String[] stats = new String[2];
+        stats[0] = "#agents = " + agents.size();
+        stats[1] = "clock = " + clock;
+        return stats;
+    }
 
-    public abstract ArrayList<String> getStats();
+
 
 }
