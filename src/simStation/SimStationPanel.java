@@ -2,11 +2,12 @@ package simStation;
 
 import mvc.AppFactory;
 import mvc.AppPanel;
+import plague.PlagueFactory;
 
 import javax.swing.*;
 import java.awt.*;
 
-public abstract class SimStationPanel extends AppPanel {
+public class SimStationPanel extends AppPanel {
     private JButton start;
     private JButton suspend;
     private JButton resume;
@@ -60,6 +61,14 @@ public abstract class SimStationPanel extends AppPanel {
 
         add(leftPanel);
         add(rightPanel);
+    }
+
+    public static void main(String[] args) {
+
+        //Specify which customization to use here by changing the factory
+        SimStationFactory factory = new PlagueFactory();
+        AppPanel panel = new SimStationPanel(factory);
+        panel.display();
     }
 
 

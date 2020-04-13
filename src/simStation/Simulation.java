@@ -18,10 +18,13 @@ import java.util.TimerTask;
 public abstract class Simulation extends Model {
     protected int clock;
     protected Timer timer;
+
     protected ArrayList<Agent> agents;
 
+    public static Integer WORLD_SIZE = 250; // height & width of the world (& view)
+
     public Simulation(){
-        ArrayList<Agent> agents = new ArrayList<>();
+        agents = new ArrayList<>();
         clock = 0;
     }
 

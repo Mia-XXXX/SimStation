@@ -29,8 +29,8 @@ public abstract class Agent implements Runnable, Serializable {
         this.name = name;
         this.heading = Heading.values()[random.nextInt(4)];
         this.speed  = random.nextInt(10);
-        this.xc = random.nextInt(500);
-        this.yc = random.nextInt(500);
+        this.xc = random.nextInt(Simulation.WORLD_SIZE);
+        this.yc = random.nextInt(Simulation.WORLD_SIZE);
         this.world = world;
         this.state = null;
 
