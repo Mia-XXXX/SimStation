@@ -26,9 +26,9 @@ public class PlagueView extends SimStationView {
 
             //paint the healthy patients
             if (plagueAgent.isInfected())
-                gc.setColor(Color.GREEN);
-            else
                 gc.setColor(Color.RED);
+            else
+                gc.setColor(Color.GREEN);
 
             int r = 10;
             gc.fillOval(agent.getXc(), agent.getYc(), r, r);

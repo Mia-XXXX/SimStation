@@ -1,9 +1,15 @@
 package plague;
 
 import simStation.Agent;
+import simStation.Heading;
 import simStation.Simulation;
 
 public class PlagueAgent extends Agent {
+
+    public PlagueAgent(String name, Simulation world, boolean infected) {
+        this(name, world);
+        this.infected = infected;
+    }
 
     public boolean isInfected() {
         return infected;
@@ -33,7 +39,11 @@ public class PlagueAgent extends Agent {
     }
 
     private void moveRandomly() {
-        //todo
+        this.heading = Heading.values()[random.nextInt(4)];
+        this.speed = 5;
+
+        move(speed);
+        world.changed();
     }
 
     private void infectOthers(PlagueAgent target) {
@@ -48,10 +58,10 @@ public class PlagueAgent extends Agent {
             //generate another random number
             randomNumber = (int) (random.nextDouble() * 100);
 
-            if (randomNumber > PlagueSimulation.RESISTANCE)
+            if (randomNumber > PlagueSimulation.RESISTANCE) {
                 //infect the neighbor
                 target.infected = true;
-
+            }
         }
     }
 }

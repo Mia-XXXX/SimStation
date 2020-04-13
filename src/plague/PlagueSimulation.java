@@ -15,10 +15,15 @@ public class PlagueSimulation extends Simulation {
 
     @Override
     protected void populate() {
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 49; i++) {
             Agent newAgent = new PlagueAgent("PlagueAgent", this);
             agents.add(newAgent);
         }
+
+        //make an infected agent
+        Agent newAgent = new PlagueAgent("PlagueAgent", this, true);
+        agents.add(newAgent);
+
         changed();
 
     }
