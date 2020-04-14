@@ -10,7 +10,6 @@
 package boids;
 
 import simStation.Agent;
-import simStation.Heading;
 import simStation.Simulation;
 
 public class Bird extends Agent {
@@ -19,14 +18,12 @@ public class Bird extends Agent {
         super(name, world);
     }
 
-
-
     public void update(){
         Flocking flocking = (Flocking) world;
         Bird a = (Bird) flocking.getNeighbor(this);
         this.speed = a.speed;
         this.heading = a.heading;
-        move(speed);
+        move(this.speed);
         world.changed();
     }
 

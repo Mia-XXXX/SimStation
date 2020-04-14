@@ -3,6 +3,7 @@
  *   Hui, 4/2: created
  *   Hui, 4/6: update to new method
  *   Hui, 4/11:update
+ *   Hui, 4/13: debug getNeighbor()
  */
 
 
@@ -78,17 +79,15 @@ public abstract class Simulation extends Model {
 
     public synchronized Agent getNeighbor(Agent seeker) {
         Agent agent = null;
-        double min = 1000;
-        try {
-            wait();
-        } catch (InterruptedException e) {
-            System.out.print(e.getLocalizedMessage());
-        }
+        double min = Integer.MAX_VALUE;
+
         for (Agent a : agents) {
-            double distance = Math.sqrt(Math.pow((seeker.getXc() - a.getXc()), 2) + Math.pow((seeker.getYc() - a.getYc()), 2));
-            if (distance < min) {
-                min = distance;
-                agent = a;
+            if (seeker != a) {
+                double distance = Math.sqrt(Math.pow((seeker.getXc() - a.getXc()), 2) + Math.pow((seeker.getYc() - a.getYc()), 2));
+                if (distance < min) {
+                    min = distance;
+                    agent = a;
+                }
             }
         }
         return agent;

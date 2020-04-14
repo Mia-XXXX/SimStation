@@ -1,5 +1,7 @@
 package simStation;
 
+import boids.FlockingFactory;
+import drunks.RandomWalkFactory;
 import mvc.AppFactory;
 import mvc.AppPanel;
 import plague.PlagueFactory;
@@ -57,7 +59,6 @@ public class SimStationPanel extends AppPanel {
         JPanel rightPanel = new JPanel();
         rightPanel.setLayout(new FlowLayout());
         rightPanel.add(view);
-
 
         add(leftPanel);
         add(rightPanel);

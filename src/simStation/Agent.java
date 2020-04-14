@@ -2,7 +2,7 @@
  * Edit history:
  *   Hui, 4/2: created
  *   Hui, 4/6: update to new method
- *
+ *   Hui, 4/13: debug move()
  */
 
 package simStation;
@@ -12,30 +12,25 @@ import java.util.Random;
 
 public abstract class Agent implements Runnable, Serializable {
 
-
     protected String name;
     protected Heading heading;
-    protected Integer xc;
-    protected Integer yc;
+    protected int xc;
+    protected int yc;
     protected Simulation world;
     private AgentState state;
     private Thread thread;
     protected Random random = new Random();
     protected int speed;
 
-
-
-    public Agent(String name,  Simulation world) {
+    public Agent(String name, Simulation world) {
         this.name = name;
         this.heading = Heading.values()[random.nextInt(4)];
-        this.speed  = random.nextInt(10);
+        this.speed  = random.nextInt(7) + 3;
         this.xc = random.nextInt(Simulation.WORLD_SIZE);
         this.yc = random.nextInt(Simulation.WORLD_SIZE);
         this.world = world;
         this.state = null;
-
     }
-
 
     public String getName() {
         return name;
@@ -76,7 +71,6 @@ public abstract class Agent implements Runnable, Serializable {
         }
     }
 
-
     public void start(){
        if(state == null){
            state = AgentState.READY;
@@ -85,13 +79,12 @@ public abstract class Agent implements Runnable, Serializable {
        }
     }
 
-
     public synchronized void stop() {
         if (state !=AgentState.STOPPED){
             state = AgentState.STOPPED;
         }
     }
-    public synchronized  boolean isStopped(){ return state == AgentState.STOPPED;}
+    public synchronized boolean isStopped(){ return state == AgentState.STOPPED;}
     public synchronized void suspend() {
        if(state == AgentState.RUNNING){
            state = AgentState.SUSPENDED;}
@@ -104,9 +97,6 @@ public abstract class Agent implements Runnable, Serializable {
         }
     }
 
-
-
-
     public abstract void update();
 
     public void move(int steps) {
@@ -114,20 +104,41 @@ public abstract class Agent implements Runnable, Serializable {
         {
             case NORTH:
             {
+                if(yc - steps < 0)
+                {
+                    yc = Simulation.WORLD_SIZE + (yc - steps);
+                }
                 yc -= steps;
+                break;
             }
             case SOUTH:
             {
+                if(yc + steps > Simulation.WORLD_SIZE)
+                {
+                    yc = Simulation.WORLD_SIZE - steps;
+                }
                 yc += steps;
+                break;
             }
             case EAST:
             {
+                if(xc + steps > Simulation.WORLD_SIZE)
+                {
+                    xc = Simulation.WORLD_SIZE - steps;
+                }
                 xc += steps;
+                break;
             }
             case WEST:
             {
+                if(xc - steps < 0)
+                {
+                    xc = Simulation.WORLD_SIZE - (xc - steps);
+                }
                 xc -= steps;
+                break;
             }
-        } world.changed();
+        }
+        world.changed();
     }
 }

@@ -2,12 +2,14 @@ package simStation;
 
 import mvc.Model;
 import mvc.View;
+import plague.PlagueAgent;
+import plague.PlagueSimulation;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public abstract class SimStationView extends View {
+public class SimStationView extends View {
 
     protected ArrayList<Agent> getAgents() {
         Simulation model = (Simulation) this.model;
@@ -20,5 +22,12 @@ public abstract class SimStationView extends View {
         this.setBorder(BorderFactory.createLineBorder(Color.BLACK));
     }
 
-    protected abstract void paintComponent(Graphics gc);
+    protected void paintComponent(Graphics gc){
+        Simulation simulationPaint = (Simulation) model;
+        gc.setColor(Color.GREEN);
+
+        for (Agent agent : getAgents()) {
+            gc.fillOval(agent.getXc(), agent.getYc(), 5, 5);
+        }
+    };
 }

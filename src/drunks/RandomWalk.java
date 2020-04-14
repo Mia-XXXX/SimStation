@@ -8,7 +8,10 @@
 
 package drunks;
 
+import mvc.Model;
+import mvc.View;
 import simStation.Agent;
+
 import simStation.Simulation;
 
 
@@ -24,4 +27,6 @@ public class RandomWalk extends Simulation {
         }
         changed();
     }
+
+
 }
