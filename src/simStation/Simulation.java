@@ -46,8 +46,13 @@ public abstract class Simulation extends Model {
 
 
     public void start(){
-        agents = new ArrayList<>();
-        populate();
+
+        //only reset the agents if it has started
+        if (clock != 0) {
+            agents = new ArrayList<>();
+            populate();
+            clock = 0;
+        }
 
         for(int i =0; i < agents.size(); i++){
             agents.get(i).start();
@@ -78,15 +83,15 @@ public abstract class Simulation extends Model {
 
     public synchronized Agent getNeighbor(Agent seeker) {
         Agent agent = null;
-        double min = 1000;
-        try {
+        double min = Double.MAX_VALUE;
+        /*try {
             wait();
         } catch (InterruptedException e) {
             System.out.print(e.getLocalizedMessage());
-        }
+        }*/
         for (Agent a : agents) {
             double distance = Math.sqrt(Math.pow((seeker.getXc() - a.getXc()), 2) + Math.pow((seeker.getYc() - a.getYc()), 2));
-            if (distance < min) {
+            if (distance < min && distance != 0.0) {
                 min = distance;
                 agent = a;
             }

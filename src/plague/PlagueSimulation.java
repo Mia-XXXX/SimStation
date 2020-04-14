@@ -13,6 +13,17 @@ public class PlagueSimulation extends Simulation {
         populate();
     }
 
+    //return the first agent found within the radius
+    public synchronized Agent getNeighbor(Agent seeker, int radius) {
+        for (Agent a : agents) {
+            double distance = Math.sqrt(Math.pow((seeker.getXc() - a.getXc()), 2) + Math.pow((seeker.getYc() - a.getYc()), 2));
+            if (distance < radius) {
+                return a;
+            }
+        }
+        return null;
+    }
+
     @Override
     protected void populate() {
         for (int i = 0; i < 49; i++) {
@@ -27,4 +38,5 @@ public class PlagueSimulation extends Simulation {
         changed();
 
     }
+
 }

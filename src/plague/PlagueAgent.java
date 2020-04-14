@@ -28,19 +28,22 @@ public class PlagueAgent extends Agent {
         //move randomly
         moveRandomly();
 
+        PlagueSimulation world = (PlagueSimulation) this.world;
+
         //get the neighbor
+        //PlagueAgent neighbor = (PlagueAgent) world.getNeighbor(this, 200);
         PlagueAgent neighbor = (PlagueAgent) world.getNeighbor(this);
 
         //then infect its neighbor
-        if (this.infected)
+        if (neighbor != null && this.infected)
             infectOthers(neighbor);
 
         world.changed();
     }
 
     private void moveRandomly() {
-        this.heading = Heading.values()[random.nextInt(4)];
-        this.speed = 5;
+        this.heading = Heading.values()[(int) (Math.random() * 4)];
+        this.speed = random.nextInt(10);
 
         move(speed);
         world.changed();
