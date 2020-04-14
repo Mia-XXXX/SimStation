@@ -78,15 +78,10 @@ public abstract class Simulation extends Model {
 
     public synchronized Agent getNeighbor(Agent seeker) {
         Agent agent = null;
-        double min = 1000;
-        try {
-            wait();
-        } catch (InterruptedException e) {
-            System.out.print(e.getLocalizedMessage());
-        }
+        double min = Integer.MAX_VALUE;
         for (Agent a : agents) {
             double distance = Math.sqrt(Math.pow((seeker.getXc() - a.getXc()), 2) + Math.pow((seeker.getYc() - a.getYc()), 2));
-            if (distance < min) {
+            if (distance < min && distance != 0) {
                 min = distance;
                 agent = a;
             }
