@@ -1,12 +1,13 @@
 /*
  * Edit history:
- *   Phuc Phan, 4/12: created
- *
+ *  Phuc Phan, 4/12: created
+ *	Phuc Phan, 4/13: fix bug null neighbor
  *
  */
 package prisoner;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import simStation.*;
 
@@ -47,26 +48,31 @@ class PrisonerAgent extends Agent {
 		TournamentSimulation tournament = (TournamentSimulation) world;
 		PrisonerAgent neighbor = (PrisonerAgent) tournament.getNeighbor(this);
 		
-		boolean prison1Choice = cooperate();
-		boolean prison2Choice = neighbor.cooperate();
-		
-		if(prison1Choice && prison2Choice){
-			increaseFitness(3);
-			neighbor.increaseFitness(3);
-		}else if(!prison1Choice && prison2Choice){
-			increaseFitness(5);
-			neighbor.increaseFitness(0);
-		}else if(prison1Choice && !prison2Choice){
-			increaseFitness(0);
-			neighbor.increaseFitness(5);
-		}else{
-			increaseFitness(1);
-			neighbor.increaseFitness(1);
+		if(neighbor != null){		
+			boolean prison1Choice = cooperate();
+			boolean prison2Choice = neighbor.cooperate();
+			
+			if(prison1Choice && prison2Choice){
+				increaseFitness(3);
+				neighbor.increaseFitness(3);
+			}else if(!prison1Choice && prison2Choice){
+				increaseFitness(5);
+				neighbor.increaseFitness(0);
+			}else if(prison1Choice && !prison2Choice){
+				increaseFitness(0);
+				neighbor.increaseFitness(5);
+			}else{
+				increaseFitness(1);
+				neighbor.increaseFitness(1);
+			}
+			
+			addCooperateHistory(prison2Choice);
+			neighbor.addCooperateHistory(prison1Choice);
 		}
 		
-		addCooperateHistory(prison2Choice);
-		neighbor.addCooperateHistory(prison1Choice);
 		
+		Random random = new Random();
+		random.setSeed(System.currentTimeMillis());
 		this.heading = Heading.values()[random.nextInt(4)];
 		this.speed = random.nextInt(10);
 
