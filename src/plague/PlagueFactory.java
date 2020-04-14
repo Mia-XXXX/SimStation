@@ -14,4 +14,9 @@ public class PlagueFactory extends SimStationFactory {
     public Model makeModel() {
         return new PlagueSimulation();
     }
+
+    @Override
+    public String toString() {
+        return "Plague Simulation";
+    }
 }

@@ -3,9 +3,11 @@ package simStation;
 import mvc.AppFactory;
 import mvc.AppPanel;
 import plague.PlagueFactory;
+import prisoner.TournamentFactory;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class SimStationPanel extends AppPanel {
     private JButton start;
@@ -66,7 +68,12 @@ public class SimStationPanel extends AppPanel {
     public static void main(String[] args) {
 
         //Specify which customization to use here by changing the factory
-        SimStationFactory factory = new PlagueFactory();
+        ArrayList<SimStationFactory> availableApps = new ArrayList<>();
+        availableApps.add(new PlagueFactory());
+        availableApps.add(new TournamentFactory());
+
+        SimStationFactory factory = (SimStationFactory) JOptionPane.showInputDialog(null, "Choose the customization",
+                "SimStation", JOptionPane.PLAIN_MESSAGE, null, availableApps.toArray(), null);
         AppPanel panel = new SimStationPanel(factory);
         panel.display();
     }
