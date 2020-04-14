@@ -10,13 +10,13 @@ import java.util.ArrayList;
 
 import simStation.*;
 
-class Prisoner extends Agent {
+class PrisonerAgent extends Agent {
 	private static final long serialVersionUID = 1L;
 	private int fitness = 100;
 	private Strategy strategy;
 	private ArrayList<Boolean> cooperateHistory;
 
-	public Prisoner(String name, Simulation world) {
+	public PrisonerAgent(String name, Simulation world) {
 		super(name, world);
 		strategy = new AlwaysCooperateStrategy();
 		cooperateHistory = new ArrayList<Boolean>();
@@ -44,8 +44,8 @@ class Prisoner extends Agent {
 
 	@Override
 	public void update() {
-		Tournament tournament = (Tournament) world;
-		Prisoner neighbor = (Prisoner) tournament.getNeighbor(this);
+		TournamentSimulation tournament = (TournamentSimulation) world;
+		PrisonerAgent neighbor = (PrisonerAgent) tournament.getNeighbor(this);
 		
 		boolean prison1Choice = cooperate();
 		boolean prison2Choice = neighbor.cooperate();

@@ -8,23 +8,23 @@
 package prisoner;
 import simStation.*;
 
-public class Tournament extends Simulation {
+public class TournamentSimulation extends Simulation {
 	private static final long serialVersionUID = 1L;
 
-	public Tournament(){
+	public TournamentSimulation(){
         super();
     }
 
     protected void populate(){
         for(int i=0; i<10; i++){
-        	Prisoner p = new Prisoner("prisoner",this);
+        	PrisonerAgent p = new PrisonerAgent("prisoner",this);
         	p.setStrategy(new AlwaysCheatStrategy());
             Agent newAgent = p;
             agents.add(newAgent);
         }
 
         for(int i=10; i<20; i++){
-        	Prisoner p = new Prisoner("prisoner",this);
+        	PrisonerAgent p = new PrisonerAgent("prisoner",this);
         	p.setStrategy(new AlwaysCooperateStrategy());
             Agent newAgent = p;
             agents.add(newAgent);
@@ -32,15 +32,15 @@ public class Tournament extends Simulation {
         
 
         for(int i=20; i<30; i++){
-        	Prisoner p = new Prisoner("prisoner",this);
+        	PrisonerAgent p = new PrisonerAgent("prisoner",this);
         	p.setStrategy(new CooperateOnlyIfLastOpponentCooperatedStrategy());
             Agent newAgent = p;
             agents.add(newAgent);
         }
         
 
-        for(int i=30; i<50; i++){
-        	Prisoner p = new Prisoner("prisoner",this);
+        for(int i=30; i<40; i++){
+        	PrisonerAgent p = new PrisonerAgent("prisoner",this);
         	p.setStrategy(new RandomlyCooperateStrategy());
             Agent newAgent = p;
             agents.add(newAgent);
@@ -59,7 +59,7 @@ public class Tournament extends Simulation {
         
         average = 0.0;
         for(int i=0; i<10; i++){
-        	Prisoner p = (Prisoner)agents.get(i);
+        	PrisonerAgent p = (PrisonerAgent)agents.get(i);
         	average += p.getFitness();
         }
         average /= 10.0;
@@ -67,7 +67,7 @@ public class Tournament extends Simulation {
 
         average = 0.0;
         for(int i=10; i<20; i++){
-        	Prisoner p = (Prisoner)agents.get(i);
+        	PrisonerAgent p = (PrisonerAgent)agents.get(i);
         	average += p.getFitness();
         }
         average /= 10.0;
@@ -75,18 +75,18 @@ public class Tournament extends Simulation {
         
         average = 0.0;
         for(int i=20; i<30; i++){
-        	Prisoner p = (Prisoner)agents.get(i);
+        	PrisonerAgent p = (PrisonerAgent)agents.get(i);
         	average += p.getFitness();
         }
         average /= 10.0;
         stats[4] = "Cooperate Only If LastOpponent Cooperated Strategy Prisoners' average fitness = " + average;
         
         average = 0.0;
-        for(int i=30; i<50; i++){
-        	Prisoner p = (Prisoner)agents.get(i);
+        for(int i=30; i<40; i++){
+        	PrisonerAgent p = (PrisonerAgent)agents.get(i);
         	average += p.getFitness();
         }
-        average /= 20.0;
+        average /= 10.0;
         stats[5] = "Randomly Cooperate Strategy Prisoners' average fitness = " + average;
         
         return stats;

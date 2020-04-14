@@ -1,7 +1,7 @@
 /*
  * Edit history:
  *   Hui, 4/2: created
- *
+ *	Phuc Phan, 4/13 add message box
  *
  */
 
@@ -22,6 +22,10 @@ public class StatsCommand extends Command {
     public void execute() {
         Simulation simulation = (Simulation) model;
         String[] stats = simulation.getStats();
-        //TODO: JOptionPane.showMessageDialog(
+        String message = "";
+        for(int i = 0; i < stats.length; i++){
+        	message += stats[i] + "\n";
+        }
+        JOptionPane.showMessageDialog(null, message);
     }
 }
