@@ -3,10 +3,18 @@ package plague;
 import simStation.Agent;
 import simStation.Simulation;
 
+import java.util.Arrays;
+
 public class PlagueSimulation extends Simulation {
 
     public static int VIRULENCE = 50; // % chance of infection
     public static int RESISTANCE = 2; // % chance of resisting infection
+
+    synchronized void incrementInfectedAgents() {
+        this.infectedAgents++;
+    }
+
+    int infectedAgents;
 
     public PlagueSimulation() {
         super();
@@ -26,5 +34,14 @@ public class PlagueSimulation extends Simulation {
 
         changed();
 
+    }
+
+    @Override
+    public String[] getStats() {
+        String[] old = super.getStats();
+        String[] newStats = Arrays.copyOf(old, old.length + 2);
+        newStats[old.length] = "Infected Agents: " + infectedAgents;
+        newStats[old.length + 1] = "Healthy Agents: " + (agents.size() - infectedAgents);
+        return newStats;
     }
 }

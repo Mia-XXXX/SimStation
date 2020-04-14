@@ -6,9 +6,12 @@ import simStation.Simulation;
 
 public class PlagueAgent extends Agent {
 
-    public PlagueAgent(String name, Simulation world, boolean infected) {
+    public PlagueAgent(String name, PlagueSimulation world, boolean infected) {
         this(name, world);
         this.infected = infected;
+
+        if (infected)
+            world.incrementInfectedAgents();
     }
 
     public boolean isInfected() {
@@ -58,9 +61,11 @@ public class PlagueAgent extends Agent {
             //generate another random number
             randomNumber = (int) (random.nextDouble() * 100);
 
-            if (randomNumber > PlagueSimulation.RESISTANCE) {
+            if (randomNumber > PlagueSimulation.RESISTANCE && !target.isInfected()) {
                 //infect the neighbor
                 target.infected = true;
+                PlagueSimulation world = (PlagueSimulation) this.world;
+                world.incrementInfectedAgents();
             }
         }
     }
