@@ -33,7 +33,7 @@ public class PlagueSimulation extends Simulation {
     @Override
     public String[] getStats() {
         String[] old = super.getStats();
-        String[] newStats = Arrays.copyOf(old, old.length + 2);
+        String[] newStats = Arrays.copyOf(old, old.length + 3);
         int infectedAgents = 0;
         for (Agent a : agents) {
             PlagueAgent agent = (PlagueAgent) a;
@@ -43,6 +43,7 @@ public class PlagueSimulation extends Simulation {
 
         newStats[old.length] = "Infected Agents: " + infectedAgents;
         newStats[old.length + 1] = "Healthy Agents: " + (agents.size() - infectedAgents);
+        newStats[old.length + 2] = "%infected: " + (float) infectedAgents / agents.size() * 100;
         return newStats;
     }
 }

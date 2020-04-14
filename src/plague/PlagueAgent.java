@@ -40,7 +40,7 @@ public class PlagueAgent extends Agent {
 
     private void moveRandomly() {
         this.heading = Heading.values()[random.nextInt(4)];
-        this.speed = 5;
+        this.speed = random.nextInt(10);
 
         move(speed);
         world.changed();
