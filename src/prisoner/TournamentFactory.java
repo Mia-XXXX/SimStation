@@ -22,7 +22,7 @@ public class TournamentFactory extends SimStationFactory {
     
     @Override
     public String toString() {
-        return "Tournament Simulation";
+        return "Prisoner's Dilemma Tournament Simulation";
     }
 }
 
