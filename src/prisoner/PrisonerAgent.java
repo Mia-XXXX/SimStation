@@ -7,8 +7,6 @@
 package prisoner;
 
 import java.util.ArrayList;
-import java.util.Random;
-
 import simStation.*;
 
 class PrisonerAgent extends Agent {
@@ -26,6 +24,10 @@ class PrisonerAgent extends Agent {
 	public void addCooperateHistory(boolean b){
 		cooperateHistory.add(b);
 	}
+	
+	public ArrayList<Boolean> getCooperateHistory(){
+		return cooperateHistory;
+	}
 
 	public void setStrategy(Strategy s) {
 		strategy = s;
@@ -40,7 +42,7 @@ class PrisonerAgent extends Agent {
 	}
 
 	public boolean cooperate() {
-		return strategy.cooperate(cooperateHistory);
+		return strategy.cooperate();
 	}
 
 	@Override

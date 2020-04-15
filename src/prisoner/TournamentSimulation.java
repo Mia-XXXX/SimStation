@@ -1,7 +1,7 @@
 /*
  * Edit history:
- *   Phuc Phan, 4/12: created
- *
+ *  Phuc Phan, 4/12: created
+ *	Phuc Phan 1/14: add owner for strategy
  *
  */
 
@@ -33,7 +33,7 @@ public class TournamentSimulation extends Simulation {
 
         for(int i=20; i<30; i++){
         	PrisonerAgent p = new PrisonerAgent("prisoner",this);
-        	p.setStrategy(new CooperateOnlyIfLastOpponentCooperatedStrategy());
+        	p.setStrategy(new CooperateOnlyIfLastOpponentCooperatedStrategy(p));
             Agent newAgent = p;
             agents.add(newAgent);
         }
