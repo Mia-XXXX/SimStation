@@ -47,6 +47,7 @@ public abstract class Simulation extends Model {
 
 
     public void start(){
+    	startTimer();
         agents = new ArrayList<>();
         populate();
 
