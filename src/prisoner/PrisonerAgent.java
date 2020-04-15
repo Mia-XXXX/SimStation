@@ -2,7 +2,7 @@
  * Edit history:
  *  Phuc Phan, 4/12: created
  *	Phuc Phan, 4/13: fix bug null neighbor
- *
+ *	Phuc Phan, 4/13: change the way random move
  */
 package prisoner;
 
@@ -70,9 +70,6 @@ class PrisonerAgent extends Agent {
 			neighbor.addCooperateHistory(prison1Choice);
 		}
 		
-		
-		Random random = new Random();
-		random.setSeed(System.currentTimeMillis());
 		this.heading = Heading.values()[random.nextInt(4)];
 		this.speed = random.nextInt(10);
 
