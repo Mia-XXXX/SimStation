@@ -13,19 +13,19 @@ class PrisonerAgent extends Agent {
 	private static final long serialVersionUID = 1L;
 	private int fitness = 100;
 	private Strategy strategy;
-	private ArrayList<Boolean> cooperateHistory;
+	private boolean cooperateHistory;
 
 	public PrisonerAgent(String name, Simulation world) {
 		super(name, world);
 		strategy = new AlwaysCooperateStrategy();
-		cooperateHistory = new ArrayList<Boolean>();
+		cooperateHistory = false;
 	}
 	
 	public void addCooperateHistory(boolean b){
-		cooperateHistory.add(b);
+		cooperateHistory = b;
 	}
 	
-	public ArrayList<Boolean> getCooperateHistory(){
+	public boolean getCooperateHistory(){
 		return cooperateHistory;
 	}
 

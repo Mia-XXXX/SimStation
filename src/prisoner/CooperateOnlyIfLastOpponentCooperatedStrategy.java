@@ -7,8 +7,6 @@
 
 package prisoner;
 
-import java.util.ArrayList;
-
 public class CooperateOnlyIfLastOpponentCooperatedStrategy implements Strategy{
 	private PrisonerAgent owner;
 	public CooperateOnlyIfLastOpponentCooperatedStrategy(PrisonerAgent owner) { 
@@ -16,12 +14,9 @@ public class CooperateOnlyIfLastOpponentCooperatedStrategy implements Strategy{
 	}
 	@Override
 	public boolean cooperate() {
-		ArrayList<Boolean> cooperateHistory = owner.getCooperateHistory();
-		if(cooperateHistory.size() == 0){
-			return false;
-		}
+		boolean cooperateHistory = owner.getCooperateHistory();
 		
-		if(cooperateHistory.get(cooperateHistory.size() - 1)){
+		if(cooperateHistory){
 			return true;
 		}
 		
