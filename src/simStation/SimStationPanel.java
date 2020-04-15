@@ -77,8 +77,11 @@ public class SimStationPanel extends AppPanel {
 
         SimStationFactory factory = (SimStationFactory) JOptionPane.showInputDialog(null, "Choose the customization",
                 "SimStation", JOptionPane.PLAIN_MESSAGE, null, availableApps.toArray(), null);
-        AppPanel panel = new SimStationPanel(factory);
-        panel.display();
+
+        if (factory != null) {
+            AppPanel panel = new SimStationPanel(factory);
+            panel.display();
+        }
     }
 
 
