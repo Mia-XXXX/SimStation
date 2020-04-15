@@ -75,6 +75,7 @@ public abstract class Simulation extends Model {
     }
 
     public void stop(){
+        stopTimer();
         for(int i = 0; i < agents.size(); i++){
             agents.get(i).stop();
         }

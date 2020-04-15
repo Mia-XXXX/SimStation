@@ -70,6 +70,8 @@ public class SimStationPanel extends AppPanel {
 
         //Specify which customization to use here by changing the factory
         ArrayList<SimStationFactory> availableApps = new ArrayList<>();
+        availableApps.add(new FlockingFactory());
+        availableApps.add(new RandomWalkFactory());
         availableApps.add(new PlagueFactory());
         availableApps.add(new TournamentFactory());
 
