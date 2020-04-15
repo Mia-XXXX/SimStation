@@ -23,4 +23,8 @@ public class RandomWalkFactory extends SimStationFactory{
     public Model makeModel() {
         return new RandomWalk();
     }
+
+    @Override
+    public String toString() {
+        return "RandomWalk Simulation";    }
 }

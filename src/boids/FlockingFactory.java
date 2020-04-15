@@ -22,5 +22,9 @@ public class FlockingFactory extends SimStationFactory{
         public Model makeModel() {
             return new Flocking();
         }
+
+    @Override
+    public String toString() {
+        return "Flocking Simulation";    }
 }
 
