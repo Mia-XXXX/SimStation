@@ -4,6 +4,7 @@
  *   Hui, 4/6: update to new method
  *   Hui, 4/11:update
  *   Hui, 4/13: debug getNeighbor()
+ *   Phuc Phan, 4/14: add clock feature
  */
 
 
@@ -58,6 +59,7 @@ public abstract class Simulation extends Model {
     }
 
     public void suspend(){
+    	stopTimer();
         for(int i =0; i < agents.size(); i++){
             agents.get(i).suspend();
         }
@@ -65,6 +67,7 @@ public abstract class Simulation extends Model {
     }
 
     public void resume(){
+    	startTimer();
         for(int i =0; i < agents.size(); i++){
             agents.get(i).resume();
         }
