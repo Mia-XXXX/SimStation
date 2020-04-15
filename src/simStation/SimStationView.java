@@ -24,10 +24,13 @@ public class SimStationView extends View {
 
     protected void paintComponent(Graphics gc){
         Simulation simulationPaint = (Simulation) model;
+        Color oldColor = gc.getColor();
         gc.setColor(Color.GREEN);
 
         for (Agent agent : getAgents()) {
             gc.fillOval(agent.getXc(), agent.getYc(), 5, 5);
         }
+
+        gc.setColor(oldColor);
     };
 }
