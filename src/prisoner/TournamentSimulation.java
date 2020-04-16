@@ -8,6 +8,9 @@
 package prisoner;
 import simStation.*;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class TournamentSimulation extends Simulation {
 	private static final long serialVersionUID = 1L;
 
@@ -29,7 +32,7 @@ public class TournamentSimulation extends Simulation {
             Agent newAgent = p;
             agents.add(newAgent);
         }
-        
+
 
         for(int i=20; i<30; i++){
         	PrisonerAgent p = new PrisonerAgent("prisoner",this);
@@ -37,7 +40,7 @@ public class TournamentSimulation extends Simulation {
             Agent newAgent = p;
             agents.add(newAgent);
         }
-        
+
 
         for(int i=30; i<40; i++){
         	PrisonerAgent p = new PrisonerAgent("prisoner",this);
@@ -45,10 +48,25 @@ public class TournamentSimulation extends Simulation {
             Agent newAgent = p;
             agents.add(newAgent);
         }
-        
+
         changed();
     }
-    
+
+    @Override
+    protected void startTimer() {
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new ClockUpdater(), 1000, 1000);
+    }
+
+    protected class ClockUpdater extends Simulation.ClockUpdater {
+        public void run() {
+            clock++;
+            for (int i = 0; i < getStats().length; i++) {
+                System.out.println(getStats()[i]);
+            }
+        }
+    }
+
     @Override
     public String[] getStats() {
         String[] stats = new String[6];
